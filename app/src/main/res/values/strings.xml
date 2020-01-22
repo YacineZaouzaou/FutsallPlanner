@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Futsall Planner</string>
+    <string name="all_right_reserved">Projet TPEA</string>
+    <string name="title_activity_display_championship">DisplayChampionshipActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="separateur"> : </string>
+</resources>
