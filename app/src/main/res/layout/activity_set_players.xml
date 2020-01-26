@@ -1,16 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
     tools:layout_editor_absoluteY="81dp">
     <!--android:background="@drawable/futsall_background_2"> -->
 
+    <com.google.android.material.chip.Chip
+        android:id="@+id/addPlayerChip"
+        android:text="Add Players"
+        style="@style/Widget.MaterialComponents.Chip.Action"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:chipIcon="@drawable/ic_person_add"
+        app:closeIcon="@drawable/ic_clear"/>
+
+    <LinearLayout
+        android:layout_below="@+id/addPlayerChip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+        
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/addPlayerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Add Player"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddPlayer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                app:backgroundTint="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="2dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGenerateTournament"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Generate"
+                app:backgroundTint="@color/colorPrimaryDark"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="2dp"/>
+            
+        </LinearLayout>
+        
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chioGroup"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></com.google.android.material.chip.ChipGroup>
+
+    </LinearLayout>
 
 
-
-    <TextView
+<!--    <TextView
         android:id="@+id/championshipName_create_team"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -90,9 +150,5 @@
         />
 
     </LinearLayout>
-
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+-->
+</RelativeLayout>
