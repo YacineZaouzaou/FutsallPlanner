@@ -11,23 +11,23 @@ import java.util.List;
 
 public class ScoreAdapter extends BaseAdapter {
 
-    private List<Team> list ;
+    private List<Team> teams ;
     private Context context ;
 
 
-    public ScoreAdapter(Context c , List <Team> l ) {
+    public ScoreAdapter(Context c , List <Team> teams ) {
         this.context = c ;
-        this.list = l ;
+        this.teams = teams ;
     }
 
     @Override
     public int getCount() {
-        return this.list.size();
+        return this.teams.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return this.list.get(position) ;
+        return this.teams.get(position) ;
     }
 
 
@@ -51,11 +51,11 @@ public class ScoreAdapter extends BaseAdapter {
            svh = (ScoreAdapter.ScoreViewHolder) convertView.getTag() ;
            runder = convertView ;
         }
-        Team t = list.get (position) ;
-        svh.teamsName.setText(t.getName()) ;
+        Team t = teams.get (position) ;
+        svh.teamsName.setText(t.getPlayer1()+" "+t.getPlayer2()) ;
         svh.points.setText(Integer.toString(t.getPoints())) ;
-        svh.bp.setText(Integer.toString(t.getButMarque())) ;
-        svh.bc.setText(Integer.toString(t.getButEncaisse())) ;
+        svh.bp.setText(Integer.toString(t.getScoored())) ;
+        svh.bc.setText(Integer.toString(t.getGot())) ;
         svh.ga.setText(Integer.toString(t.getMoyenneBut())) ;
 
         return runder;
@@ -71,11 +71,11 @@ public class ScoreAdapter extends BaseAdapter {
         TextView ga ;
 
         public ScoreViewHolder (View v) {
-            this.teamsName = v.findViewById(R.id.score_teams_name) ;
-            this.points = v.findViewById(R.id.score_teams_points) ;
-            this.bp = v.findViewById(R.id.score_teams_bp) ;
-            this.bc = v.findViewById(R.id.score_teams_bc) ;
-            this.ga = v.findViewById(R.id.score_teams_ga) ;
+            this.teamsName = v.findViewById(R.id.team) ;
+            this.points = v.findViewById(R.id.teamPoint) ;
+            this.bp = v.findViewById(R.id.scored) ;
+            this.bc = v.findViewById(R.id.got) ;
+            this.ga = v.findViewById(R.id.moyen) ;
         }
     }
 }

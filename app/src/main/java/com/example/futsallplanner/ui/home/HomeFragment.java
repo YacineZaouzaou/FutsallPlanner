@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+//import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
@@ -60,8 +60,8 @@ public class HomeFragment extends Fragment {
 
     private void init_debug () {
         this.debug = new ArrayList<>() ;
-        debug.add(new Match(new Team("a") , new Team("b"))) ;
+        /*debug.add(new Match(new Team("a") , new Team("b"))) ;
         debug.add(new Match(new Team("a") , new Team("c"))) ;
-        debug.add(new Match(new Team("b") , new Team("c"))) ;
+        debug.add(new Match(new Team("b") , new Team("c"))) ;*/
     }
 }

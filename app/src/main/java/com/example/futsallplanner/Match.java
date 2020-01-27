@@ -15,8 +15,6 @@ public class Match implements Serializable
     private int goalsTeam2 ;
     private String sumary ;
 
-
-
     public Match ( Team team1 , Team team2 ){
         if (team1.equals(team2)){
             Log.v("ERROR" , "un match entre une équipe et elle même") ;
@@ -49,8 +47,8 @@ public class Match implements Serializable
         this.sumary = sumary ;
     }
 
-
-
-
-
+    @Override
+    public String toString() {
+        return "["+team1+"] ["+team2+"]";
+    }
 }

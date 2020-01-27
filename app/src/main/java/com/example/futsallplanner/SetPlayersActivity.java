@@ -107,9 +107,7 @@ public class SetPlayersActivity extends AppCompatActivity {
                         players.add(chip.getText().toString());
                 }
                 Intent intent = new Intent(getApplicationContext() , DisplayChampionshipActivity.class) ;
-                intent.putExtra("names" , players) ;
-                intent.putExtra("championshipName" , "Babyfoot Tournament") ;
-                Log.v("DEBUG" , "start matche activity") ;
+                intent.putExtra("players" , players) ;
                 startActivity(intent) ;
             }
         });

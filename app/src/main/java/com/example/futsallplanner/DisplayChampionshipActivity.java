@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,21 +30,46 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_championship);
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
+        //BottomNavigationView navView = findViewById(R.id.nav_view);
 
 
         Intent savedValues = getIntent() ;
-        List<String> names = savedValues.getStringArrayListExtra("names") ;
-        String championshipName = savedValues.getStringExtra("championshipName") ;
-        this.championship = new Championship (championshipName , names) ;
+        List<String> players = savedValues.getStringArrayListExtra("players") ;
+        this.championship = new Championship (players) ;
+
         if (savedInstanceState == null) {
             savedInstanceState = new Bundle() ;
         }
+
         savedInstanceState.putSerializable ("championship" , this.championship);
+
+        ViewPager2 viewPager = findViewById(R.id.viewPager);
+        viewPager.setAdapter(new OrderPageAdapter(this));
+
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
+                tabLayout, viewPager, new TabLayoutMediator.OnConfigureTabCallback() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                switch (position){
+                    case 0 : {
+                        tab.setText("Games");
+                        tab.setIcon(R.drawable.ic_games);
+                        break;
+                    }
+                    case 1 : {
+                        tab.setText("Ranking");
+                        tab.setIcon(R.drawable.ic_view_list);
+                        break;
+                    }
+                }
+            }
+        });
+        tabLayoutMediator.attach();
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+        /*AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
                 .build();
 
@@ -47,13 +77,13 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
         navController.navigate(R.id.navigation_home , savedInstanceState);
-        navController.navigate(R.id.navigation_dashboard , savedInstanceState);
+        navController.navigate(R.id.navigation_dashboard , savedInstanceState);*/
 
 
         /* getting values from the the creating activity */
 
 
-        Bundle savedInstance = new Bundle ( )  ;
+        //Bundle savedInstance = new Bundle ( )  ;
 
 
 
@@ -85,7 +115,7 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
             for (int i = 1 ; i < params.length ; i ++) {
                 teams.add(params[i]) ;
             }
-            return new Championship(championshipName , teams);
+            return new Championship(teams);
         }
     }
 

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.google.android.material.chip.Chip;
+
 import java.util.List;
 
 public class MatchAdapter extends BaseAdapter {
@@ -49,26 +51,32 @@ public class MatchAdapter extends BaseAdapter {
             runder = convertView ;
         }
         Match m = this.matchs.get(position) ;
-        mvh.team1.setText(m.getTeam1().getName()) ;
-        mvh.team2.setText(m.getTeam2().getName()) ;
-        mvh.score1.setText(Integer.toString(m.getScore1())) ;
-        mvh.score2.setText(Integer.toString(m.getScore2())) ;
+        mvh.team1Player1.setText(m.getTeam1().getPlayer1()) ;
+        mvh.team1Player2.setText(m.getTeam1().getPlayer2()) ;
+        mvh.team2Player1.setText(m.getTeam2().getPlayer1()) ;
+        mvh.team2Player2.setText(m.getTeam2().getPlayer2()) ;
+        mvh.scoreTeam1.setText(Integer.toString(m.getScore1())) ;
+        mvh.scoreTeam2.setText(Integer.toString(m.getScore2())) ;
         return runder;
     }
 
 
     public static class MatchViewHolder {
 
-        TextView team1 ;
-        TextView team2 ;
-        TextView score1 ;
-        TextView score2 ;
+        Chip team1Player1 ;
+        Chip team1Player2 ;
+        Chip team2Player1 ;
+        Chip team2Player2 ;
+        TextView scoreTeam1 ;
+        TextView scoreTeam2 ;
 
         public MatchViewHolder (View v) {
-            this.team1 = v.findViewById(R.id.team1_name) ;
-            this.team2 = v.findViewById(R.id.team2_name) ;
-            this.score1 = v.findViewById(R.id.team1_score) ;
-            this.score2 = v.findViewById(R.id.team2_score) ;
+            this.team1Player1 = v.findViewById(R.id.team1Player1) ;
+            this.team1Player2 = v.findViewById(R.id.team1Player2) ;
+            this.team2Player1 = v.findViewById(R.id.team2Player1) ;
+            this.team2Player2 = v.findViewById(R.id.team2Player2) ;
+            this.scoreTeam1 = v.findViewById(R.id.scoreTeam1) ;
+            this.scoreTeam2 = v.findViewById(R.id.scoreTeam2) ;
         }
 
     }
