@@ -13,7 +13,6 @@ public class Match implements Serializable
     private boolean played ;
     private int goalsTeam1 ;
     private int goalsTeam2 ;
-    private String sumary ;
 
     public Match ( Team team1 , Team team2 ){
         if (team1.equals(team2)){
@@ -24,7 +23,6 @@ public class Match implements Serializable
         this.goalsTeam1 = 0 ;
         this.goalsTeam2 = 0 ;
         this.played = false ;
-        this.sumary = "" ;
 
     }
 
@@ -36,15 +34,22 @@ public class Match implements Serializable
 
     public int getScore2 () { return this.goalsTeam2 ; }
 
+    public void setGoalsTeam1(int goalsTeam1) {
+        this.goalsTeam1 = goalsTeam1;
+    }
+
+    public void setGoalsTeam2(int goalsTeam2) {
+        this.goalsTeam2 = goalsTeam2;
+    }
+
     public boolean isPlayed () { return this.played ; }
 
-    public void play (int goals1 , int goals2 , String sumary ) {
+    public void play (int goals1 , int goals2) {
         this.goalsTeam1 = goals1 ;
         this.goalsTeam2 = goals2 ;
         this.team1.processPlay(goals1 , goals2) ;
         this.team2.processPlay(goals2 , goals1) ;
         this.played = true ;
-        this.sumary = sumary ;
     }
 
     @Override

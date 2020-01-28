@@ -20,7 +20,7 @@ import java.util.List;
 
 public class DisplayChampionshipActivity extends AppCompatActivity {
 
-    private Championship championship ;
+    private Championship championship; ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +31,11 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
 
 
         Intent savedValues = getIntent() ;
-        List<String> players = savedValues.getStringArrayListExtra("players") ;
-        this.championship = new Championship (players) ;
+        if(!Championship.checkInstanceExist()){
+            List<String> players = savedValues.getStringArrayListExtra("players") ;
+            Championship.init(players);
+        }
+        this.championship = Championship.getIstance() ;
 
         if (savedInstanceState == null) {
             savedInstanceState = new Bundle() ;
@@ -113,7 +116,7 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
 
 
     /* if i had more time */
-    private static class ComputeNewChampionship extends AsyncTask <String , Integer , Championship>
+    /*private static class ComputeNewChampionship extends AsyncTask <String , Integer , Championship>
     {
         @Override
         public Championship doInBackground (String ... params) {
@@ -124,6 +127,6 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
             }
             return new Championship(teams);
         }
-    }
+    }*/
 
 }

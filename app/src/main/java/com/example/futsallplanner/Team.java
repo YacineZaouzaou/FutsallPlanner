@@ -18,6 +18,14 @@ public class Team implements Serializable
         this.player2 = player2;
     }
 
+    public Team(String player1, String player2, int points, int scoored, int got) {
+        this.player1 = player1;
+        this.player2 = player2;
+        this.points = points;
+        this.scoored = scoored;
+        this.got = got;
+    }
+
     public void processPlay (int scoored , int got) {
         this.scoored += scoored ;
         this.got += got ;

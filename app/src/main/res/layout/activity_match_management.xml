@@ -99,7 +99,7 @@
             android:layout_margin="5dp"
             android:layout_weight="1"/>
         <Button
-            android:id="@+id/addScoreeam1"
+            android:id="@+id/addScoreTeam1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_add_circle"
@@ -111,14 +111,14 @@
             android:layout_margin="5dp"
             android:layout_weight="2"/>
         <Button
-            android:id="@+id/addScoreeam2"
+            android:id="@+id/addScoreTeam2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_add_circle"
             android:layout_margin="5dp"
             android:layout_weight="1"/>
         <Button
-            android:id="@+id/removeScoreeam2"
+            android:id="@+id/removeScoreTeam2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:icon="@drawable/ic_remove_circle"

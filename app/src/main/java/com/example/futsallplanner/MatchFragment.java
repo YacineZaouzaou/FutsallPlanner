@@ -46,12 +46,12 @@ public class MatchFragment extends Fragment {
         list.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
-
-                Log.d("click", "click item +"+index);
                 Match match = adapter.getItem(index);
-                Intent intent = new Intent(getContext(),MatchManagement.class);
-                intent.putExtra("match" , match) ;
-                startActivity(intent);
+                if (!match.isPlayed()){
+                    Intent intent = new Intent(getContext(),MatchManagement.class);
+                    intent.putExtra("match" , match) ;
+                    startActivity(intent);
+                }
             }
         });
 
