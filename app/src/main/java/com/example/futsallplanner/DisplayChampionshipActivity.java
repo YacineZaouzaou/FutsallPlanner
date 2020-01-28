@@ -2,19 +2,16 @@ package com.example.futsallplanner;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.viewpager.widget.ViewPager;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -49,12 +46,22 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         TabLayoutMediator tabLayoutMediator = new TabLayoutMediator(
                 tabLayout, viewPager, new TabLayoutMediator.OnConfigureTabCallback() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 switch (position){
                     case 0 : {
                         tab.setText("Games");
                         tab.setIcon(R.drawable.ic_games);
+                        long matchNotPlayed = championship.getMatches().stream().filter(m -> m.isPlayed()==false).count();
+                        if(matchNotPlayed > 0){
+                            BadgeDrawable badgeDrawable = tab.getOrCreateBadge();
+                            badgeDrawable.setBackgroundColor(
+                                    ContextCompat.getColor(getApplicationContext(), R.color.colorAccent)
+                            );
+                            badgeDrawable.setVisible(true);
+                            badgeDrawable.setNumber((int)matchNotPlayed);
+                        }
                         break;
                     }
                     case 1 : {

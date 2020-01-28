@@ -28,7 +28,7 @@ public class MatchAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public Match getItem(int position) {
         return this.matchs.get(position) ;
     }
 
@@ -55,8 +55,14 @@ public class MatchAdapter extends BaseAdapter {
         mvh.team1Player2.setText(m.getTeam1().getPlayer2()) ;
         mvh.team2Player1.setText(m.getTeam2().getPlayer1()) ;
         mvh.team2Player2.setText(m.getTeam2().getPlayer2()) ;
-        mvh.scoreTeam1.setText(Integer.toString(m.getScore1())) ;
-        mvh.scoreTeam2.setText(Integer.toString(m.getScore2())) ;
+        if (m.isPlayed()){
+            mvh.scoreTeam1.setText(Integer.toString(m.getScore1())) ;
+            mvh.scoreTeam2.setText(Integer.toString(m.getScore2())) ;
+        }
+        else {
+            mvh.scoreTeam1.setText("--") ;
+            mvh.scoreTeam2.setText("--") ;
+        }
         return runder;
     }
 

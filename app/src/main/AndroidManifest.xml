@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MatchManagement"></activity>
         <activity
             android:name=".DisplayChampionshipActivity"
-            android:label="@string/title_activity_display_championship"></activity>
+            android:label="@string/title_activity_display_championship" />
         <activity android:name=".SelectChampionshipActivity" />
         <activity android:name=".SetPlayersActivity" />
         <activity android:name=".MainActivity">

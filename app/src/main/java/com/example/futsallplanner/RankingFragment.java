@@ -2,10 +2,13 @@ package com.example.futsallplanner;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -39,6 +42,19 @@ public class RankingFragment extends Fragment {
 
         this.adapter = new ScoreAdapter(getContext(), c.getTeams());
         this.list.setAdapter(this.adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Log.i("Test", "Position=" + position);
+
+                // Fait Planter le SmartPhone
+                //String item = (String)parent.getItemAtPosition(position);
+                //String  item = ((TextView)view).getText().toString();
+
+
+            }
+        });
         /*
         if (savedInstanceState == null) {
             savedInstanceState = new Bundle() ;
