@@ -1,19 +1,20 @@
 package com.example.futsallplanner;
 
+import android.app.Application;
 import android.os.Build;
 import android.util.Log;
 
+import com.example.futsallplanner.util.DatabaseManager;
 import com.example.futsallplanner.util.Util;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
+import java.util.Set;
 import java.util.stream.Collectors;
-
 import androidx.annotation.RequiresApi;
 
 public class Championship implements Serializable
@@ -22,14 +23,37 @@ public class Championship implements Serializable
     private List<Team> teams ;
     private List<Match> matches ;
     private static List<String> players = null;
-    private Map<Team , Integer> classement ;
+    //private Map<Team , Integer> classement ;
 
     private static Championship championship = null;
 
     private Championship (List<String> players){
         computeTeams (players) ;
         computeMatchs () ;
+    }
 
+    private Championship () {
+
+    }
+
+    public static void loadChampionship (List<Team> teams , List<Match> matchs )
+    {
+        Championship.championship = new Championship() ;
+        Championship.championship.teams = teams ;
+        Championship.championship.matches = matchs ;
+        Championship.players = Championship.championship.compputePlayers() ;
+
+
+    }
+
+    private List<String> compputePlayers ()
+    {
+        Set<String> s = new HashSet<>() ;
+        for (Team t : this.teams){
+            s.add(t.getPlayer1()) ;
+            s.add(t.getPlayer2()) ;
+        }
+        return new ArrayList<>(s) ;
     }
 
     public static Championship getIstance(){
@@ -68,6 +92,7 @@ public class Championship implements Serializable
             this.teams.add(new Team(players.get(i), players.get(i+1))) ;
         }
         Log.d("Team",teams.toString());
+        // add to database
     }
 
     private void computeMatchs () {
@@ -79,7 +104,17 @@ public class Championship implements Serializable
         Log.d("Matchs",matches.toString());
     }
 
+    public static void reset ()
+    {
+        Championship.championship = null ;
+    }
+
     public List<Match> getMatches () { return this.matches ; }
+
+    public List<Team> getTeamsSimple ()
+    {
+        return this.teams ;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public List<Team> getTeams () { return this.teams.stream().map(t -> new Util(t, t.getPoints())).sorted(Comparator.comparingLong(Util::getPoint).reversed())

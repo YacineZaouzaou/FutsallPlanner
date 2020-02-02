@@ -26,6 +26,16 @@ public class Match implements Serializable
 
     }
 
+    public Match (Team t1 , Team t2 , int s1 , int s2)
+    {
+        this.team1 = t1 ;
+        this.team2 = t2 ;
+        this.goalsTeam1 = s1 ;
+        this.goalsTeam2 = s2 ;
+        this.played = true ;
+    }
+
+
     public Team getTeam1 () { return this.team1 ; }
 
     public Team getTeam2 () { return this.team2 ; }

@@ -111,44 +111,6 @@ public class SetPlayersActivity extends AppCompatActivity {
                 startActivity(intent) ;
             }
         });
-
-
-        /*championshipName = findViewById(R.id.championshipName_create_team) ;
-        Intent saved_values = getIntent() ;
-        championshipName.setText(saved_values.getStringExtra("championshipName")) ;
-
-        *//* dealing with the list view *//*
-
-        this.teams = (ListView) findViewById(R.id.teams) ;
-        this.teamsAdapter = new TeamsAdapter( this ) ;
-        this.teams.setAdapter(this.teamsAdapter) ;
-
-
-        *//* dealing with name team field ( text area ) *//*
-
-        this.teamName = findViewById(R.id.team_name) ;
-
-        *//* dealing with add team button  *//*
-
-        this.addTeamButton = (Button) findViewById(R.id.add_team_button) ;
-        this.addTeamButton.setOnClickListener(new View.OnClickListener () {
-            @Override
-            public void onClick (View v){
-                teamsAdapter.addItem(teamName.getText().toString() ) ;
-                teamsAdapter.notifyDataSetChanged() ;
-
-            }
-        });
-
-        *//* dealing with the create championship button  *//*
-
-        this.createChampionship = (Button) findViewById(R.id.create_championship) ;
-        this.createChampionship.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View v) {
-                start_matchActivity () ;
-            }
-        });*/
     }
 
     public void start_matchActivity () {

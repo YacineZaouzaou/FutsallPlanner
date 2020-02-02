@@ -1,15 +1,20 @@
 package com.example.futsallplanner;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.futsallplanner.util.DatabaseManager;
 import com.google.android.material.chip.Chip;
 
 public class MatchManagement extends AppCompatActivity {
@@ -34,22 +39,33 @@ public class MatchManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_management);
 
+
+
+
         Intent saved_values = getIntent() ;
         this.match = (Match) saved_values.getSerializableExtra("match");
         this.championship = Championship.getIstance();
+
 
         team1Player1 = (Chip) findViewById(R.id.matchTeam1Player1);
         team1Player2 = (Chip) findViewById(R.id.matchTeam1Player2);
         team2Player1 = (Chip) findViewById(R.id.matchTeam2Player1);
         team2Player2 = (Chip) findViewById(R.id.matchTeam2Player2);
+
         team1Score = (TextView) findViewById(R.id.matchScoreTeam1);
         team2Score = (TextView) findViewById(R.id.matchScoreTeam2);
+
         addScoreTeam1 = (Button) findViewById(R.id.addScoreTeam1);
         removeScoreTeam1 = (Button) findViewById(R.id.removeScoreTeam1);
+        removeScoreTeam1.setEnabled(false);
+
         addScoreTeam2 = (Button) findViewById(R.id.addScoreTeam2);
         removeScoreTeam2 = (Button) findViewById(R.id.removeScoreTeam2);
-        removeScoreTeam2 = (Button) findViewById(R.id.removeScoreTeam2);
+        removeScoreTeam2.setEnabled(false);
+
         finishMatch = (Button) findViewById(R.id.finishMatch);
+
+
 
         team1Player1.setText(match.getTeam1().getPlayer1());
         team1Player2.setText(match.getTeam1().getPlayer2());
@@ -95,8 +111,79 @@ public class MatchManagement extends AppCompatActivity {
             public void onClick(View v) {
                 match.play(match.getScore1(), match.getScore2());
                 Championship.getIstance().getMatches().stream().filter(m -> m.toString().equals(match.toString())).forEach(m -> m.play(match.getScore1(), match.getScore2()));
+                DatabaseManager db = new DatabaseManager(getApplicationContext()) ;
+                db.insertIntoMatchs(match.getTeam1().getPlayer1(),
+                        match.getTeam1().getPlayer2(),
+                        match.getTeam2().getPlayer1(),
+                        match.getTeam2().getPlayer2(),
+                        match.getScore1() , match.getScore2());
                 Intent intent = new Intent(getApplicationContext() , DisplayChampionshipActivity.class) ;
                 startActivity(intent) ;
+                finish() ;
+
+
+            }
+        });
+
+        team1Score.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int score = Integer.parseInt(s.toString());
+                Integer score2 = Integer.parseInt(team2Score.getText().toString()) ;
+                if (score == 0) {
+                    removeScoreTeam1.setEnabled(false);
+                }else
+                {
+                    removeScoreTeam1.setEnabled(true);
+                }
+                if (score + score2 >= 5) {
+                    addScoreTeam1.setEnabled(false);
+                    addScoreTeam2.setEnabled(false);
+                }else {
+                    addScoreTeam1.setEnabled(true);
+                    addScoreTeam2.setEnabled(true);
+                }
+            }
+        });
+
+        team2Score.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int score = Integer.parseInt(s.toString());
+                int score2 = Integer.parseInt(team1Score.getText().toString()) ;
+                if (score == 0) {
+                    removeScoreTeam2.setEnabled(false);
+                }else
+                {
+                    removeScoreTeam2.setEnabled(true);
+                }
+                if (score + score2 >= 5) {
+                    addScoreTeam1.setEnabled(false);
+                    addScoreTeam2.setEnabled(false);
+                }else {
+                    addScoreTeam1.setEnabled(true);
+                    addScoreTeam2.setEnabled(true);
+                }
             }
         });
 
