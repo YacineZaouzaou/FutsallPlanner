@@ -1,5 +1,6 @@
 package com.example.futsallplanner;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +20,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        OnBackPressedCallback callBack= new OnBackPressedCallback(true) {
+
+            @Override
+            public void handleOnBackPressed () {
+                finishAffinity();
+            }
+        } ;
+
+        getOnBackPressedDispatcher().addCallback(this, callBack);
         this.dbm = new DatabaseManager( getApplicationContext() ) ;
         if ( ! this.dbm.isEmpty()) {
 

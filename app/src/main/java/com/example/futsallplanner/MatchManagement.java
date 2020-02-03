@@ -186,9 +186,11 @@ public class MatchManagement extends AppCompatActivity {
                 if (score + score2 >= 5) {
                     addScoreTeam1.setEnabled(false);
                     addScoreTeam2.setEnabled(false);
+                    finishMatch.setEnabled(true);
                 }else {
                     addScoreTeam1.setEnabled(true);
                     addScoreTeam2.setEnabled(true);
+                    finishMatch.setEnabled(false);
                 }
             }
         });

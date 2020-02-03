@@ -42,7 +42,7 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
 
             @Override
             public void handleOnBackPressed () {
-                back_pressed();
+                finishAffinity();
             }
         } ;
 
@@ -118,12 +118,7 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
     {
         switch (item.getItemId()){
             case R.id.action_reset :
-                Intent i = new Intent(getApplicationContext() , MainActivity.class) ;
-                startActivity(i) ;
-                Championship.reset () ;
-                DatabaseManager db = new DatabaseManager(getApplicationContext()) ;
-                db.reset();
-                finish();
+                back_pressed();
                 return true ;
         }
         return true ;
@@ -138,7 +133,12 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        finishAffinity();
+                        Intent i = new Intent(getApplicationContext() , MainActivity.class) ;
+                        startActivity(i) ;
+                        Championship.reset () ;
+                        DatabaseManager db = new DatabaseManager(getApplicationContext()) ;
+                        db.reset();
+                        finish();;
                     }
                 });
         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {

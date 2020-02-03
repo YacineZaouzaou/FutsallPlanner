@@ -1,5 +1,6 @@
 package com.example.futsallplanner;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -41,6 +42,16 @@ public class SetPlayersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_players);
+
+        OnBackPressedCallback callBack= new OnBackPressedCallback(true) {
+
+            @Override
+            public void handleOnBackPressed () {
+                finishAffinity();
+            }
+        } ;
+
+        getOnBackPressedDispatcher().addCallback(this, callBack);
 
         //view
         btnAddPlayer = (MaterialButton) findViewById(R.id.btnAddPlayer);
