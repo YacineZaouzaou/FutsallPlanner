@@ -48,22 +48,8 @@ public class RankingFragment extends Fragment {
 
                 Log.i("Test", "Position=" + position);
 
-                // Fait Planter le SmartPhone
-                //String item = (String)parent.getItemAtPosition(position);
-                //String  item = ((TextView)view).getText().toString();
-
-
             }
         });
-        /*
-        if (savedInstanceState == null) {
-            savedInstanceState = new Bundle() ;
-        }
-
-        savedInstanceState.putSerializable ("championship" , c);
-        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
-        navController.navigate(R.id.navigation_home , savedInstanceState);
-        */
 
         return root;
     }

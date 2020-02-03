@@ -23,7 +23,6 @@ public class Championship implements Serializable
     private List<Team> teams ;
     private List<Match> matches ;
     private static List<String> players = null;
-    //private Map<Team , Integer> classement ;
 
     private static Championship championship = null;
 

@@ -4,12 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import com.example.futsallplanner.Match;
 import com.example.futsallplanner.Team;
-
-import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,7 +85,6 @@ public class DatabaseManager extends SQLiteOpenHelper
         return  tl ;
     }
 
-
     public int [] getResultOfMatch (String p1t1 , String p2t1 , String p1t2 , String p2t2 )
     {
         String ask = "select score1 , score2 from matchs where player1team1 = '"+p1t1+"' and " +
@@ -103,20 +97,6 @@ public class DatabaseManager extends SQLiteOpenHelper
         }
         return null ;
     }
-
-    public List<Match> getAllMatch ()
-    {
-        String ask = "select * from matchs" ;
-        Cursor c = this.getReadableDatabase().rawQuery(ask , null) ;
-        c.moveToFirst() ;
-        List<Match> ml = new ArrayList<>() ;
-        while ( ! c.isAfterLast()){
-           // Match m = new Match(c.getInt(1) , c.getInt(2) , c.getInt(3) , c.getInt(4 ) , c.getInt(5) , c.getInt(6)) ;
-            //ml.add(m) ;
-        }
-        return null ;
-    }
-
 
     public void reset ()
     {

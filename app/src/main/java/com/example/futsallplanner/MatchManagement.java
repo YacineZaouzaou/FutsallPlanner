@@ -64,7 +64,7 @@ public class MatchManagement extends AppCompatActivity {
         removeScoreTeam2.setEnabled(false);
 
         finishMatch = (Button) findViewById(R.id.finishMatch);
-
+        finishMatch.setEnabled(false);
 
 
         team1Player1.setText(match.getTeam1().getPlayer1());
@@ -153,9 +153,11 @@ public class MatchManagement extends AppCompatActivity {
                 if (score + score2 >= 5) {
                     addScoreTeam1.setEnabled(false);
                     addScoreTeam2.setEnabled(false);
+                    finishMatch.setEnabled(true);
                 }else {
                     addScoreTeam1.setEnabled(true);
                     addScoreTeam2.setEnabled(true);
+                    finishMatch.setEnabled(false);
                 }
             }
         });
