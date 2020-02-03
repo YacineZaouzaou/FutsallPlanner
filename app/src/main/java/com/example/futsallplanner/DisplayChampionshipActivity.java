@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.example.futsallplanner.util.DatabaseManager;
 import com.google.android.material.badge.BadgeDrawable;
@@ -83,7 +85,6 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
                     case 0 : {
                         tab.setText("Games");
                         tab.setIcon(R.drawable.ic_games);
-                        Log.v("MATHC3 " , championship.getMatches().toString()) ;
                         long matchNotPlayed = championship.getMatches().stream().filter(m -> m.isPlayed()==false).count();
                         if(matchNotPlayed > 0){
                             BadgeDrawable badgeDrawable = tab.getOrCreateBadge();
@@ -106,6 +107,28 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
         tabLayoutMediator.attach();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId()){
+            case R.id.action_reset :
+                Intent i = new Intent(getApplicationContext() , MainActivity.class) ;
+                startActivity(i) ;
+                Championship.reset () ;
+                DatabaseManager db = new DatabaseManager(getApplicationContext()) ;
+                db.reset();
+                finish();
+                return true ;
+        }
+        return true ;
+    }
+
     private void back_pressed () {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.MyAlertDialogStyle);
         builder.setCancelable(true);
@@ -115,12 +138,7 @@ public class DisplayChampionshipActivity extends AppCompatActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent i = new Intent(getApplicationContext() , MainActivity.class) ;
-                        startActivity(i) ;
-                        Championship.reset () ;
-                        DatabaseManager db = new DatabaseManager(getApplicationContext()) ;
-                        db.reset();
-                        finish();
+                        finishAffinity();
                     }
                 });
         builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {

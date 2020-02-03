@@ -117,6 +117,10 @@ public class MatchManagement extends AppCompatActivity {
                         match.getTeam2().getPlayer1(),
                         match.getTeam2().getPlayer2(),
                         match.getScore1() , match.getScore2());
+                Team t= match.getTeam1()  ;
+                db.updateTeam(t.getPlayer1() , t.getPlayer2() , t.getPoints() , t.getScoored() , t.getGot() , t.getMoyenneBut());
+                t = match.getTeam2() ;
+                db.updateTeam(t.getPlayer1() , t.getPlayer2() , t.getPoints() , t.getScoored() , t.getGot() , t.getMoyenneBut());
                 Intent intent = new Intent(getApplicationContext() , DisplayChampionshipActivity.class) ;
                 startActivity(intent) ;
                 finish() ;

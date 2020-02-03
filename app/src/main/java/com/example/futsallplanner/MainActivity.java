@@ -30,16 +30,10 @@ public class MainActivity extends AppCompatActivity {
 
             for (Team t : teams)
             {
-                Log.e("gg" ,t.getPlayer1() + t.getPlayer2()) ;
+                Log.e ("TEAMS" , t.getPlayer1()+" "+t.getPlayer2()+" "+t.getPoints()) ;
             }
-
-            Log.v("tag" , "teams got ") ;
 
             List<Match> matchs = this.computeMatch (teams) ;
-
-            for (Match m : matchs) {
-                Log.v ("matches  " , m.getTeam1().getPlayer1() + m.getTeam1().getPlayer2() +m.getTeam2().getPlayer1() + m.getTeam2().getPlayer2()) ;
-            }
 
             Championship.loadChampionship(teams , matchs);
 
@@ -72,12 +66,14 @@ public class MainActivity extends AppCompatActivity {
                 Match m ;
                 if (res != null) {
                      m = new Match(t.get(i) , t.get(j) , res[0] , res[1]) ;
+                    Log.e("add" ,m.getTeam2().getPlayer1() + t.get(j).getPlayer2()) ;
+                    Log.e(" jjj" , res[0] +" "+ res[1]) ;
 
                 }else {
                      m = new Match(t.get(i) , t.get(j)) ;
                 }
                 ret.add(m) ;
-                Log.e("add" ,m.getTeam2().getPlayer1() + t.get(j).getPlayer2()) ;
+
             }
         }
         return ret ;
