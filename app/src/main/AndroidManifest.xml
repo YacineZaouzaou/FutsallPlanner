@@ -13,7 +13,6 @@
         <activity
             android:name=".DisplayChampionshipActivity"
             android:label="@string/title_activity_display_championship" />
-        <activity android:name=".SelectChampionshipActivity" />
         <activity android:name=".SetPlayersActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
